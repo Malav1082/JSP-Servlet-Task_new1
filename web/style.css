@@ -1,0 +1,73 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 Mar, 2024, 10:57:52 AM
+    Author     : Malav.Shah
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    align-content: center;
+}
+h1 {
+    text-align: center;
+    color: black;
+}
+.table-container {
+    margin: auto;
+    overflow: auto;
+    height: 50%;
+}
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+    height: 50%;
+}
+th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 10px;
+}
+input[type="text"], input[type="date"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+input[type="submit"]:hover {
+    background-color: green;
+}
+input[type="Button"]:hover{
+    background-color: coral;
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+.back {
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
