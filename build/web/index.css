@@ -115,6 +115,10 @@ input[type="button"] {
     background-color: #4CAF50;
 }
 
+.tr-btn td .login:hover{
+    background-color: #4CAF50;
+}
+
 .tr-btn td .register {
     background-color: #2196F3;
 }
@@ -137,6 +141,18 @@ input[type="submit"].login:hover {
 }
 
 input[type="button"].register:hover {
+    background-color: blue;
+}
+
+input[type="submit"].register:hover {
+    background-color: blue;
+}
+
+input[type="button"].login:hover {
+    background-color: green;
+}
+
+input[type="submit"].btn-forgot:hover, .btn-reset:hover{
     background-color: blue;
 }
 
