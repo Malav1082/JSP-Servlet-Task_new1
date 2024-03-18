@@ -93,7 +93,7 @@
                     <tr class="tr-btn">
                         <td colspan="2">
                             <input type="submit" value="Forgot Password" class="btn-forgot">
-                            <input type="Button" value="Login" onclick="location.href = 'index.jsp';">
+                            <input type="Button" value="Login" onclick="location.href = 'index.jsp';" class="login">
                         </td>
                     </tr>
                 </table>

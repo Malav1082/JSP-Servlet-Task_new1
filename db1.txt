@@ -5,7 +5,6 @@
  */
 package com.RM;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -14,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +47,6 @@ public class Database extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM/Records.db";
-    private static final String DB_FILE_NAME = "Records.db";
 
     private static final String sql = "SELECT * FROM TblUserMaster ORDER BY UserID";
 
@@ -58,29 +55,13 @@ public class Database extends HttpServlet {
         super.init();
         try {
             Class.forName("org.sqlite.JDBC");
-            createDatabase();
         } catch (ClassNotFoundException ex) {
             throw new ServletException("SQLite JDBC driver not found", ex);
         }
     }
 
-    private void createDatabase() throws ServletException {
-        ServletContext context = getServletContext();
-        String dbPath = context.getRealPath("/WEB-INF/RM/" + DB_FILE_NAME);
-        File dbFile = new File(dbPath);
-        if (!dbFile.exists()) {
-            String jdbcUrl = JDBC_URL + dbPath;
-
-            try (Connection connection = DriverManager.getConnection(jdbcUrl)) {
-                createTblUserMaster(connection);
-                createTblEmployeeMaster(connection);
-                createTblEmployeeDetail(connection);
-            } catch (SQLException e) {
-                throw new ServletException("Failed to create database", e);
-            }
-        }
-    }
-
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
@@ -94,13 +75,13 @@ public class Database extends HttpServlet {
 
                 //out.println("<h2>Connected to the database.</h2>");
                 // Create TblUserMaster table
-                createTblUserMaster(connection);
+                createTblUserMaster(connection, out);
 
                 // Create TblEmployeeMaster table
-                createTblEmployeeMaster(connection);
+                createTblEmployeeMaster(connection, out);
 
                 // Create TblEmployeeDetail table
-                createTblEmployeeDetail(connection);
+                createTblEmployeeDetail(connection, out);
 
 //                // Display tables
 //                displayTables(connection, out);
@@ -112,7 +93,7 @@ public class Database extends HttpServlet {
                 request.setAttribute("jdbcUrl", JDBC_URL);
 
                 // Forward the request to the JSP
-                request.getRequestDispatcher("home.jsp").forward(request, response);
+                request.getRequestDispatcher("your_jsp_file.jsp").forward(request, response);
             } else {
                 out.println("<html><body>");
                 out.println("<h2>Failed to connect to the database.</h2>");
@@ -134,7 +115,7 @@ public class Database extends HttpServlet {
         }
     }
 
-    private static void createTblUserMaster(Connection connection) throws SQLException {
+    private static void createTblUserMaster(Connection connection, PrintWriter out) throws SQLException {
         String createUserMasterTable = "CREATE TABLE IF NOT EXISTS TblUserMaster ("
                 + "UserID INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "Email TEXT,"
@@ -147,7 +128,7 @@ public class Database extends HttpServlet {
         }
     }
 
-    private static void createTblEmployeeMaster(Connection connection) throws SQLException {
+    private static void createTblEmployeeMaster(Connection connection, PrintWriter out) throws SQLException {
         String createEmployeeMasterTable = "CREATE TABLE IF NOT EXISTS TblEmployeeMaster ("
                 + "MastCode INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "UserID INTEGER,"
@@ -165,7 +146,7 @@ public class Database extends HttpServlet {
         }
     }
 
-    private static void createTblEmployeeDetail(Connection connection) throws SQLException {
+    private static void createTblEmployeeDetail(Connection connection, PrintWriter out) throws SQLException {
         String createEmployeeDetailTable = "CREATE TABLE IF NOT EXISTS TblEmployeeDetail ("
                 + "EmpCode INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "AddressLine1 TEXT,"
