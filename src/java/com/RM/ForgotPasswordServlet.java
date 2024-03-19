@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,8 +55,7 @@ public class ForgotPasswordServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     // JDBC URL for SQLite database
-    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
-
+//    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -113,7 +113,11 @@ public class ForgotPasswordServlet extends HttpServlet {
                 request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
                 return;
             }
-
+            ServletContext con = getServletContext();
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
+            
             // Insert new password into the database
             connection = DriverManager.getConnection(JDBC_URL);
             String updateQuery = "UPDATE TblUserMaster SET password = ? WHERE email = ?";

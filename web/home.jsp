@@ -10,15 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Home Page</title>
-        <%-- Retrieve the JDBC URL attribute --%>
-        <%
-            String jdbcUrl = (String) request.getAttribute("jdbcUrl");
-        %>
-        <%
-        String db_url = "jdbc:sqlite:" + (new java.io.File(application.getRealPath("/")).getParentFile().getParentFile()).getAbsolutePath() + application.getInitParameter("Employee");
-            System.out.println("homepage link: " + db_url);
-        %>
-        <sql:setDataSource driver="org.sqlite.JDBC" url="<%=db_url%>" var="ds"/>
+
         <style>
             table {
                 border-collapse: collapse;
@@ -154,10 +146,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Retrieve the JDBC URL dynamically -->
                     <%
+                        ServletContext con = getServletContext();
+                        String realPath = con.getRealPath("Records.db");
+                        String jdbcUrl = "jdbc:sqlite:" + realPath;
+
                         Connection conn = null;
                         try {
-                            conn = DriverManager.getConnection("jdbc:sqlite:D://Java Training//Task 4//RM//Records.db");
+                            conn = DriverManager.getConnection(jdbcUrl);
                             Statement stmt = conn.createStatement();
                             String query = "SELECT M.EmpID, M.EmpName, M.Designation, M.Department, M.JoinedDate, M.Salary, D.AddressLine1, D.AddressLine2, D.City, D.State, D.Country FROM TblEmployeeMaster M JOIN TblEmployeeDetail D ON M.MastCode = D.EmpCode";
                             ResultSet rs = stmt.executeQuery(query);

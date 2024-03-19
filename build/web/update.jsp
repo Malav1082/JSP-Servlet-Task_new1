@@ -20,11 +20,16 @@
             String[] val = new String[11];
         %>
         <%
+            String realPath = "";
             Connection conn = null;
             ResultSet rs = null;
 
             try {
-                conn = DriverManager.getConnection("jdbc:sqlite:D://Java Training//Task 4//RM//Records.db");
+                ServletContext con = getServletContext();
+                realPath = con.getRealPath("Records.db");
+                System.out.println("Database path: " + realPath);
+                String JDBC_URL = "jdbc:sqlite:" + realPath;
+                conn = DriverManager.getConnection(JDBC_URL);
                 PreparedStatement stmt = conn.prepareStatement("SELECT M.EmpID, M.EmpName, M.Designation, M.Department, M.JoinedDate, M.Salary, D.AddressLine1, D.AddressLine2, D.City, D.State, D.Country FROM TblEmployeeMaster M JOIN TblEmployeeDetail D ON M.MastCode = D.EmpCode where EmpID = ?");
                 stmt.setString(1, request.getParameter("empId"));
                 rs = stmt.executeQuery();

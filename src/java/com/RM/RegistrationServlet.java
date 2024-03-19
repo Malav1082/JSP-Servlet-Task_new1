@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,8 +66,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     // JDBC URL for SQLite database
-    private static final String JDBC_URL = "jdbc:sqlite:D://Java Training//Task 4//RM//Records.db";
-
+//    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -134,6 +134,10 @@ public class RegistrationServlet extends HttpServlet {
 
         // Insert new user into the database
         try {
+            ServletContext con = getServletContext();
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             c = DriverManager.getConnection(JDBC_URL);
             String checkExistingUserQuery = "SELECT * FROM TblUserMaster WHERE Email = ?";
             try (PreparedStatement checkExistingUserStatement = c.prepareStatement(checkExistingUserQuery)) {
@@ -162,7 +166,7 @@ public class RegistrationServlet extends HttpServlet {
                             System.out.println(request.getSession(false));
                             response.sendRedirect("index.jsp");
                         } else {
-                           
+
                             // No rows affected, display error message
                             request.setAttribute("errorMessage", "Registration failed");
                             // Set the email attribute before forwarding the request

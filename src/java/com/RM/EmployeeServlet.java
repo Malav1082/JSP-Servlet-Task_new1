@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ public class EmployeeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String JDBC_URL = "jdbc:sqlite:D://Java Training//Task 4//RM//Records.db";
+//    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
 
     @Override
     public void init() throws ServletException {
@@ -127,6 +128,10 @@ public class EmployeeServlet extends HttpServlet {
         ResultSet rs = null;
 
         try {
+            ServletContext con = getServletContext();
+        String realPath = con.getRealPath("Records.db");
+        System.out.println("Database path: " + realPath);
+        String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
             String sql = "SELECT COUNT(*) FROM TblEmployeeMaster WHERE EmpID = ?";
             ps = conn.prepareStatement(sql);
@@ -195,6 +200,10 @@ public class EmployeeServlet extends HttpServlet {
 
         Connection conn = null;
         try {
+            ServletContext con = getServletContext();
+        String realPath = con.getRealPath("Records.db");
+        System.out.println("Database path: " + realPath);
+        String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
             // Begin transaction
             conn.setAutoCommit(false);
@@ -271,6 +280,10 @@ public class EmployeeServlet extends HttpServlet {
 
         Connection conn = null;
         try {
+            ServletContext con = getServletContext();
+        String realPath = con.getRealPath("Records.db");
+        System.out.println("Database path: " + realPath);
+        String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
 
             // Update data in TblEmployeeMaster table
@@ -327,6 +340,10 @@ public class EmployeeServlet extends HttpServlet {
 
         Connection conn = null;
         try {
+            ServletContext con = getServletContext();
+        String realPath = con.getRealPath("Records.db");
+        System.out.println("Database path: " + realPath);
+        String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
 
             // Delete record from TblEmployeeDetail table using subquery

@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,8 +63,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     // JDBC URL for SQLite database
-    private static final String JDBC_URL = "jdbc:sqlite:D://Java Training//Task 4//RM//Records.db";
-
+//    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
         // Retrieve form data
         String email = request.getParameter("email");
         String password = request.getParameter("password");
- 
+
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             // Set error message
             request.setAttribute("errorMessage", "Email and password are required.");
@@ -109,7 +109,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Login successful, set userID attribute in session
             HttpSession session = request.getSession(true);
-            System.out.println(request.getSession(false) +"login Servlet");
+            System.out.println(request.getSession(false) + "login Servlet");
             session.setAttribute("userID", userID.toString()); // Set userID instead of email
 
             // Redirect to home page
@@ -121,6 +121,10 @@ public class LoginServlet extends HttpServlet {
         String query = "SELECT UserID FROM TblUserMaster WHERE Email = ? AND Password = ?";
         Connection connection = null;
         try {
+            ServletContext con = getServletContext();
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("D path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             connection = DriverManager.getConnection(JDBC_URL);
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, email);

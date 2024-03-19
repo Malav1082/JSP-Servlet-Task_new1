@@ -100,11 +100,7 @@
                     <tr class="tr-btn" >
                         <td colspan="2">
                             <input type="submit" value="Register" class="register">
-<<<<<<< HEAD
                             <input type="Button" value="Login" onclick="location.href = 'index.jsp';" class="login">
-=======
-                            <input type="Button" value="Login" onclick="location.href = 'index.jsp';"  class="login">
->>>>>>> 95af6f6b03ad91c80da8a6a4e18166747d99ceab
                         </td>
                     </tr>
                 </table>

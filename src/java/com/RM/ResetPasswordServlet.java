@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ResetPasswordServlet extends HttpServlet {
 
-    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
-
+//    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -78,6 +78,10 @@ public class ResetPasswordServlet extends HttpServlet {
 
         Connection connection = null;
         try {
+            ServletContext con = getServletContext();
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             connection = DriverManager.getConnection(JDBC_URL);
             String updateQuery = "UPDATE TblUserMaster SET password = ? WHERE email = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
