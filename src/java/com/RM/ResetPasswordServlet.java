@@ -55,27 +55,6 @@ public class ResetPasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("password1");
         String confirmPassword = request.getParameter("password2");
 
-        if (email.isEmpty() || oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
-            request.setAttribute("errorMessage", "Error: Please enter all information");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-            return;
-        }
-
-        if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("errorMessage", "Error: Passwords do not match");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-            return;
-        }
-
-        // Validate password length and match
-        if (!isValidPassword(newPassword)) {
-            request.setAttribute("errorMessage", "Password should be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, and 1 special character");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-            return;
-        }
-
         Connection connection = null;
         try {
             ServletContext con = getServletContext();
@@ -110,38 +89,7 @@ public class ResetPasswordServlet extends HttpServlet {
             }
         }
     }
-    // Method to validate password length and complexity
-
-    private boolean isValidPassword(String password1) {
-        // Check if password is at least 8 characters long
-        if (password1.length() < 8) {
-            return false;
-        }
-
-        // Check for at least one uppercase letter, one lowercase letter, and one special character
-        boolean hasUppercase = false;
-        boolean hasLowercase = false;
-        boolean hasSpecialChar = false;
-
-        for (char c : password1.toCharArray()) {
-            if (Character.isUpperCase(c)) {
-                hasUppercase = true;
-            } else if (Character.isLowerCase(c)) {
-                hasLowercase = true;
-            } else if (!Character.isLetterOrDigit(c)) {
-                hasSpecialChar = true;
-            }
-
-            // If all criteria are met, return true
-            if (hasUppercase && hasLowercase && hasSpecialChar) {
-                return true;
-            }
-        }
-
-        // If any criteria are not met, return false
-        return false;
-    }
-
+    
     @Override
     public String getServletInfo() {
         return "Reset Password Servlet";

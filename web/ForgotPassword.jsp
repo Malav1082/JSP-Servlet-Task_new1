@@ -40,30 +40,55 @@
                     toggleIcon.innerText = "👁️";
                 }
             }
+            function validateForm() {
+                var email = document.forms["forgotPasswordForm"]["email"].value;
+                var password1 = document.forms["forgotPasswordForm"]["password1"].value;
+                var password2 = document.forms["forgotPasswordForm"]["password2"].value;
 
-            function focusOnField() {
-                var errorMessage = '<%= request.getAttribute("errorMessage")%>';
-                if (errorMessage != null) {
-                    switch (errorMessage) {
-                        case "Error: Enter Email":
-                            document.getElementById("email").focus();
-                            break;
-                        case "Error: Enter New Password":
-                            document.getElementById("password1").focus();
-                            break;
-                        case "Error: Confirm Password":
-                            document.getElementById("password2").focus();
-                            break;
-                        default:
-                            break;
+                // Empty field validation
+                if (email === "" || password1 === "" || password2 === "") {
+                    alert("Please fill in all fields.");
+
+                    // Focus on the first empty field
+                    if (email === "") {
+                        document.getElementById("email").focus();
+                    } else if (password1 === "") {
+                        document.getElementById("password1").focus();
+                    } else {
+                        document.getElementById("password2").focus();
                     }
+                    return false;
                 }
+
+                // Email format validation
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert("Please enter a valid email address.");
+                    document.getElementById("email").focus();
+                    return false;
+                }
+
+                // Password validation
+                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordPattern.test(password1)) {
+                    alert("Password should be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character.");
+                    document.getElementById("password1").focus();
+                    return false;
+                }
+
+                // Password match validation
+                if (password1 !== password2) {
+                    alert("Passwords do not match.");
+                    document.getElementById("password2").focus();
+                    return false;
+                }
+                return true;
             }
         </script>
     </head>
     <body onload="focusOnField()">
         <div class="container">
-            <form action="ForgotPasswordServlet" method="post">
+            <form name="forgotPasswordForm" action="ForgotPasswordServlet" method="post" onsubmit="return validateForm()">
                 <table style="width : 100%;">
                     <tr>
                     <h1 class="forgot">Forgot Password</h1>
@@ -74,19 +99,19 @@
                     </tr>
                     <tr>
                         <td>Email :</td>
-                        <td><input type="email" name="email" id="email" placeholder="Enter Email" <% if (request.getParameter("email") != null) {%>value="<%= request.getParameter("email")%>"<% }%> required></td>
+                        <td><input type="text" name="email" id="email" placeholder="Enter Email" <% if (request.getParameter("email") != null) {%>value="<%= request.getParameter("email")%>"<% }%>></td>
                     </tr>
                     <tr>
                         <td>New Password :</td>
                         <td class="password-toggle">
-                            <input type="password" name="password1" id="password1" placeholder="New Password" <% if (request.getParameter("password1") != null) {%>value="<%= request.getParameter("password1")%>"<% }%> required>
+                            <input type="password" name="password1" id="password1" placeholder="New Password" <% if (request.getParameter("password1") != null) {%>value="<%= request.getParameter("password1")%>"<% }%>>
                             <span class="toggle-password" onclick="togglePasswordVisibility('password1', 'toggleIcon1')" id="toggleIcon1">👁️</span>
                         </td>
                     </tr>
                     <tr>
                         <td>Confirm Password :</td>
                         <td class="password-toggle">
-                            <input type="password" name="password2" id="password2" placeholder="Confirm Password" <% if (request.getParameter("password2") != null) {%>value="<%= request.getParameter("password2")%>"<% }%> required>
+                            <input type="password" name="password2" id="password2" placeholder="Confirm Password" <% if (request.getParameter("password2") != null) {%>value="<%= request.getParameter("password2")%>"<% }%>>
                             <span class="toggle-password" onclick="togglePasswordVisibility('password2', 'toggleIcon2')" id="toggleIcon2">👁️</span>
                         </td>
                     </tr>

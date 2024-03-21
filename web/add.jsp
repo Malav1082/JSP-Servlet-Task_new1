@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Records</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+    <h1>Add Records</h1>
         <script>
             // Function to extract URL parameters
             function getUrlParameter(name) {
@@ -50,7 +51,6 @@
 
     </head>
     <body>
-        <h1>Add Records</h1>
 
         <!--Display error message if present--> 
     <c:if test="${not empty errorMessage}">

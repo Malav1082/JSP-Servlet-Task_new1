@@ -1,10 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%        System.out.println(request.getSession(false) + "index.jsp");%>
 <!DOCTYPE html>
 <html> 
     <head>
         <% String successMessage = request.getParameter("success");
-            if (successMessage != null && !successMessage.isEmpty()) {%>
+        if (successMessage != null && !successMessage.isEmpty()) {%>
     <div class="alert alert-success">
         <%= successMessage%>
     </div>
@@ -21,7 +20,7 @@
         .password-toggle input[type="text"] {
             padding-right: 35px;
         }
-        
+
         .password-toggle .toggle-password {
             position: absolute;
             right: 5px;
@@ -29,7 +28,15 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
-        
+        .tr-btn input, .tr-btn a {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
     </style>
     <script>
         function togglePasswordVisibility() {
@@ -69,7 +76,6 @@
                 document.forms["loginForm"]["email"].focus();
                 return false;
             }
-
             return true;
         }
     </script>
@@ -91,19 +97,23 @@
                     <td><input type="text" name="email" placeholder="Enter Email"></td>
                 </tr>
                 <tr>
-                    <td>Password :</td>
+                    <td>Password:</td>
                     <td class="password-toggle">
                         <input type="password" name="password" id="password" placeholder="Enter Password" <% if (request.getParameter("password") != null) {%>value="<%= request.getParameter("password")%>"<% }%>>
                         <span class="toggle-password" onclick="togglePasswordVisibility()" id="toggleIcon">👁️</span>
                     </td>
                 </tr>
                 <tr class="tr-btn">
-                    <td><input type="submit" name="submit" value="Login" class="login"></td>
-                    <td><input type="Button" value="Register" onclick="location.href = 'Register.jsp';" class="register"></td>
+                    <td colspan="2"><input type="submit" name="submit" value="Login" class="login"></td>
                 </tr>
                 <tr class="tr-btn">
-                    <td><a href="ForgotPassword.jsp" class="h-forgot">Forgot Password?</a></td>
-                    <td><a href="ResetPassword.jsp" class="h-reset">Reset Password</a></td>
+                    <td colspan="2"><input type="Button" value="Register" onclick="location.href = 'Register.jsp';" class="register"></td>
+                </tr>
+                <tr class="tr-btn">
+                    <td colspan="2"><a href="ForgotPassword.jsp" class="h-forgot">Forgot Password?</a></td>
+                </tr>
+                <tr class="tr-btn">
+                    <td colspan="2"><a href="ResetPassword.jsp" class="h-reset">Reset Password</a></td>
                 </tr>
             </table>
         </form>

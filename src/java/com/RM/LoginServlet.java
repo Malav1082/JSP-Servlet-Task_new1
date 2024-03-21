@@ -88,16 +88,7 @@ public class LoginServlet extends HttpServlet {
         // Retrieve form data
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
-        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
-            // Set error message
-            request.setAttribute("errorMessage", "Email and password are required.");
-
-            // Forward the request back to the index.jsp page
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-
+ 
         Integer userID = validateLogin(email, password);
 
         if (userID == null) {

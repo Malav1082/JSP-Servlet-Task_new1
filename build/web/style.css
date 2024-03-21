@@ -10,29 +10,36 @@ and open the template in the editor.
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #c1dbff;
     align-content: center;
+    font-size: 15px;
 }
+
 h1 {
     text-align: center;
     color: black;
 }
+
 .table-container {
     margin: auto;
     overflow: auto;
     height: 50%;
 }
+
 table {
     border-collapse: collapse;
     width: 50%;
     margin: auto;
     height: 50%;
+    background-color: #fff;
 }
+
 th, td {
     border: 1px solid black;
     text-align: left;
     padding: 10px;
 }
+
 input[type="text"], input[type="date"], input[type="number"] {
     width: 100%;
     padding: 8px;
@@ -40,7 +47,9 @@ input[type="text"], input[type="date"], input[type="number"] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     margin-bottom: 10px;
+    background-color: lightyellow;
 }
+
 input[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -51,16 +60,20 @@ input[type="submit"] {
     font-size: 16px;
     margin-top: 10px;
 }
+
 input[type="submit"]:hover {
     background-color: green;
 }
+
 input[type="Button"]:hover{
     background-color: coral;
 }
+
 .error-message {
     color: red;
     margin-top: 10px;
 }
+
 .back {
     background-color: orange;
     color: white;

@@ -39,29 +39,67 @@
                 }
             }
 
-            function focusOnField() {
-                var errorMessage = '<%= request.getAttribute("errorMessage")%>';
-                if (errorMessage != null) {
-                    switch (errorMessage) {
-                        case "Error: Enter Email":
-                            document.getElementById("email").focus();
-                            break;
-                        case "Error: Enter Mobile Number":
-                            document.getElementById("mobnum").focus();
-                            break;
-                        case "Error: Enter Password":
-                            document.getElementById("password1").focus();
-                            break;
-                        default:
-                            break;
+            function validateForm() {
+                var email = document.forms["registerForm"]["email"].value;
+                var mobnum = document.forms["registerForm"]["mobnum"].value;
+                var password1 = document.forms["registerForm"]["password1"].value;
+                var password2 = document.forms["registerForm"]["password2"].value;
+
+                // Empty field validation
+                if (email === "" || mobnum === "" || password1 === "" || password2 === "") {
+                    alert("Please fill in all fields.");
+
+                    // Focus on the first empty field
+                    if (email === "") {
+                        document.getElementById("email").focus();
+                    } else if (mobnum === "") {
+                        document.getElementById("mobnum").focus();
+                    } else if (password1 === "") {
+                        document.getElementById("password1").focus();
+                    } else {
+                        document.getElementById("password2").focus();
                     }
+                    return false;
                 }
+
+                // Email format validation
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert("Please enter a valid email address.");
+                    document.getElementById("email").focus();
+                    return false;
+                }
+
+                // Mobile number format validation
+                var mobnumPattern = /^\d{10}$/;
+                if (!mobnumPattern.test(mobnum)) {
+                    alert("Please enter a valid 10-digit mobile number.");
+                    document.getElementById("mobnum").focus();
+                    return false;
+                }
+
+                // Password validation
+                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordPattern.test(password1)) {
+                    alert("Password should be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character.");
+                    document.getElementById("password1").focus();
+                    return false;
+                }
+
+                // Password match validation
+                if (password1 !== password2) {
+                    alert("Passwords do not match.");
+                    document.getElementById("password1").focus();
+                    return false;
+                }
+                return true;
             }
         </script>
+
     </head>
     <body onload="focusOnField()">
         <div class="container">
-            <form action="RegistrationServlet" method="post">
+            <form name="registerForm" action="RegistrationServlet" method="post" onsubmit="return validateForm()">
                 <table style="width : 100%;">
                     <tr>
                     <h1 class="register">Register</h1>
@@ -74,26 +112,26 @@
                     <tr>
                         <td>Email :</td>
                         <td>
-                            <input type="email" name="email" id="email" placeholder="Enter Email" <% if (request.getAttribute("email") != null) {%>value="<%= request.getAttribute("email")%>"<% } %> required>
+                            <input type="text" name="email" id="email" placeholder="Enter Email" <% if (request.getAttribute("email") != null) {%>value="<%= request.getAttribute("email")%>"<% } %>>
                         </td>
                     </tr>
                     <tr>
                         <td>Mobile Number :</td>
                         <td>
-                            <input type="number" name="mobnum" id="mobnum" placeholder="Enter Mobile Number" <% if (request.getParameter("mobnum") != null) {%>value="<%= request.getParameter("mobnum")%>"<% } %> required>
+                            <input type="text" name="mobnum" id="mobnum" placeholder="Enter Mobile Number" <% if (request.getParameter("mobnum") != null) {%>value="<%= request.getParameter("mobnum")%>"<% } %>>
                         </td>
                     </tr>
                     <tr>
                         <td>Password :</td>
                         <td class="password-toggle">
-                            <span><input type="password" name="password1" id="password1" placeholder="Enter Password" <% if (request.getParameter("password1") != null) {%>value="<%= request.getParameter("password1")%>"<% } %> required></span>
+                            <span><input type="password" name="password1" id="password1" placeholder="Enter Password" <% if (request.getParameter("password1") != null) {%>value="<%= request.getParameter("password1")%>"<% } %>></span>
                             <span class="toggle-password" onclick="togglePasswordVisibility('password1', 'toggleIcon1')" id="toggleIcon1">👁️</span>
                         </td>
                     </tr>
                     <tr>
                         <td>Confirm Password :</td>
                         <td class="password-toggle">
-                            <input type="password" name="password2" id="password2" placeholder="Confirm Password" <% if (request.getParameter("password2") != null) {%>value="<%= request.getParameter("password2")%>"<% }%> required>
+                            <input type="password" name="password2" id="password2" placeholder="Confirm Password" <% if (request.getParameter("password2") != null) {%>value="<%= request.getParameter("password2")%>"<% }%>>
                             <span class="toggle-password" onclick="togglePasswordVisibility('password2', 'toggleIcon2')" id="toggleIcon2">👁️</span>
                         </td>
                     </tr>

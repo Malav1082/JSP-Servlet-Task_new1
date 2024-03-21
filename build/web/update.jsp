@@ -13,9 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Records</title>        
         <link rel="stylesheet" type="text/css" href="style.css">
+        <h1>Update Records</h1>
     </head>
     <body>
-        <h1>Update Records</h1>
         <%!
             String[] val = new String[11];
         %>

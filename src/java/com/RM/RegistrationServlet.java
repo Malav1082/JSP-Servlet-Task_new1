@@ -83,52 +83,6 @@ public class RegistrationServlet extends HttpServlet {
         String email = request.getParameter("email");
         String mobileNumber = request.getParameter("mobnum");
         String password1 = request.getParameter("password1");
-        String password2 = request.getParameter("password2");
-
-        // Check if any field is empty
-        if (email.isEmpty() || mobileNumber.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
-            request.setAttribute("errorMessage", "All fields are required");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
-
-        // Validate email format
-        if (!isValidEmail(email)) {
-            request.setAttribute("errorMessage", "Invalid email format");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
-
-        // Validate phone number format
-        if (!isValidPhoneNumber(mobileNumber)) {
-            request.setAttribute("errorMessage", "Phone number should be 10 digits");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
-
-        // Validate password length and match
-        if (!isValidPassword(password1)) {
-            request.setAttribute("errorMessage", "Password should be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, and 1 special character");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
-
-        // Check if passwords match
-        if (!password1.equals(password2)) {
-            request.setAttribute("errorMessage", "Passwords do not match");
-            // Set the email attribute before forwarding the request
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
 
         Connection c = null;
 
@@ -196,52 +150,7 @@ public class RegistrationServlet extends HttpServlet {
             }
         }
     }
-
-    // Method to validate email format
-    private boolean isValidEmail(String email) {
-        // Regular expression for email validation
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        return email.matches(emailRegex);
-    }
-
-    // Method to validate phone number format
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        // Regular expression for phone number validation (simple)
-        String phoneRegex = "\\d{10}";
-        return phoneNumber.matches(phoneRegex);
-    }
-
-    // Method to validate password length and complexity
-    private boolean isValidPassword(String password1) {
-        // Check if password is at least 8 characters long
-        if (password1.length() < 8) {
-            return false;
-        }
-
-        // Check for at least one uppercase letter, one lowercase letter, and one special character
-        boolean hasUppercase = false;
-        boolean hasLowercase = false;
-        boolean hasSpecialChar = false;
-
-        for (char c : password1.toCharArray()) {
-            if (Character.isUpperCase(c)) {
-                hasUppercase = true;
-            } else if (Character.isLowerCase(c)) {
-                hasLowercase = true;
-            } else if (!Character.isLetterOrDigit(c)) {
-                hasSpecialChar = true;
-            }
-
-            // If all criteria are met, return true
-            if (hasUppercase && hasLowercase && hasSpecialChar) {
-                return true;
-            }
-        }
-
-        // If any criteria are not met, return false
-        return false;
-    }
-
+    
     @Override
     public String getServletInfo() {
         return "Registration Servlet";
