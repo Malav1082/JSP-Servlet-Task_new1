@@ -187,3 +187,11 @@ input[type="submit"].btn-forgot:hover, .btn-reset:hover{
 .tr-btn td .h-forgot:hover, .tr-btn td .h-reset:hover {
     color: #ff0000;
 }
+input:focus, a:focus {
+    outline: 2px solid blueviolet;
+}
+.error-message {
+    color: #f44336; /* Red color */
+    font-size: 14px;
+    margin-top: 5px;
+}

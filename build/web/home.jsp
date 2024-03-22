@@ -11,14 +11,23 @@
         <meta charset="UTF-8">
         <title>Home Page</title>
         <!-- Display Records -->
-    <h1>Records</h1>
+    <h1>Employee Records</h1>
 
     <style>
         body {
             background-color: #c1dbff;
         }
         h1 {
-            margin-left: 45%;
+            text-align: center;
+            color: black; 
+            font-size: 24px; 
+            margin-top: 20px;
+            text-transform: uppercase;
+            display: inline-block;
+            border: 2px solid blue;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin-left: 37%;
             font-family: Arial, sans-serif;
         }
         table {

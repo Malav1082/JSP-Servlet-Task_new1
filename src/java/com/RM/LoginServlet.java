@@ -88,22 +88,17 @@ public class LoginServlet extends HttpServlet {
         // Retrieve form data
         String email = request.getParameter("email");
         String password = request.getParameter("password");
- 
+
         Integer userID = validateLogin(email, password);
 
         if (userID == null) {
-            // Set error message
             request.setAttribute("errorMessage", "Invalid email or password. Please try again.");
-
-            // Forward the request back to the index.jsp page
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
-            // Login successful, set userID attribute in session
-            HttpSession session = request.getSession(true);
-            System.out.println(request.getSession(false) + "login Servlet");
-            session.setAttribute("userID", userID.toString()); // Set userID instead of email
 
-            // Redirect to home page
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userID", userID.toString());
+
             response.sendRedirect("home.jsp");
         }
     }
@@ -122,11 +117,11 @@ public class LoginServlet extends HttpServlet {
                 statement.setString(2, password);
 
                 try (ResultSet rs = statement.executeQuery()) {
-                    // If any rows are returned, return the UserID
+
                     if (rs.next()) {
                         return rs.getInt("UserID");
                     } else {
-                        return null; // Invalid credentials
+                        return null;
                     }
                 }
             }

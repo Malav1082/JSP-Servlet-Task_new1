@@ -26,6 +26,11 @@
                 margin-left: 25%;
                 margin-right: 25%;
             }
+            .error-message {
+                color: #f44336;
+                font-size: 14px;
+                margin-top: 5px;
+            }
         </style>
         <script>
             function togglePasswordVisibility(passwordId, toggleIconId) {
@@ -44,44 +49,45 @@
                 var email = document.forms["forgotPasswordForm"]["email"].value;
                 var password1 = document.forms["forgotPasswordForm"]["password1"].value;
                 var password2 = document.forms["forgotPasswordForm"]["password2"].value;
+                var errorMessageContainer = document.getElementById("errorMessage");
 
-                // Empty field validation
-                if (email === "" || password1 === "" || password2 === "") {
-                    alert("Please fill in all fields.");
-
-                    // Focus on the first empty field
-                    if (email === "") {
-                        document.getElementById("email").focus();
-                    } else if (password1 === "") {
-                        document.getElementById("password1").focus();
-                    } else {
-                        document.getElementById("password2").focus();
-                    }
-                    return false;
-                }
-
-                // Email format validation
-                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(email)) {
-                    alert("Please enter a valid email address.");
+                if (email === "") {
+                    errorMessageContainer.innerText = "Email cannot be Empty.";
                     document.getElementById("email").focus();
                     return false;
                 }
 
-                // Password validation
-                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                if (!passwordPattern.test(password1)) {
-                    alert("Password should be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character.");
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    errorMessageContainer.innerText = "Please enter a valid email address.";
+                    document.getElementById("email").focus();
+                    return false;
+                }
+                if (password1 === "") {
+                    errorMessageContainer.innerText = "New Password cannot be Empty.";
                     document.getElementById("password1").focus();
                     return false;
                 }
 
-                // Password match validation
-                if (password1 !== password2) {
-                    alert("Passwords do not match.");
+                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordPattern.test(password1)) {
+                    errorMessageContainer.innerText = "Password should be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character.";
+                    document.getElementById("password1").focus();
+                    return false;
+                }
+
+                if (password2 === "") {
+                    errorMessageContainer.innerText = "Confirm Password cannot be Empty.";
                     document.getElementById("password2").focus();
                     return false;
                 }
+
+                if (password1 !== password2) {
+                    errorMessageContainer.innerText = "Passwords do not match";
+                    document.getElementById("password2").focus();
+                    return false;
+                }
+                errorMessageContainer.innerText = "";
                 return true;
             }
         </script>
@@ -92,10 +98,21 @@
                 <table style="width : 100%;">
                     <tr>
                     <h1 class="forgot">Forgot Password</h1>
-                    <%String errorMessage = (String) request.getAttribute("errorMessage");%>
-                    <% if (errorMessage != null) {%>
-                    <p class="error-message"><%= errorMessage%></p>
-                    <% }%>
+                    </tr>
+                    <!-- Error message will be displayed here -->
+                    <%
+                        String errorMessage = (String) request.getAttribute("errorMessage");
+                        if (errorMessage != null && !errorMessage.isEmpty()) {
+                    %>
+                    <p id="errorMessage" class="error-message">
+                        <%= errorMessage%>
+                    </p>
+                    <% } %>
+                    <tr>
+                        <td colspan="2">
+                            <!-- Error message will be displayed here -->
+                            <p id="errorMessage" class="error-message"></p>
+                        </td>
                     </tr>
                     <tr>
                         <td>Email :</td>
