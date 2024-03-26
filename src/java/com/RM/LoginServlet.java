@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("userID", userID.toString());
 
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("welcome.jsp");
         }
     }
 

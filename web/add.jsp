@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Records</title>
+        <title>Add Records</title>                
         <link rel="stylesheet" type="text/css" href="style.css">
     <h1>Add Records</h1>
         <script>

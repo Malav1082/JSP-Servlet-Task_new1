@@ -11,8 +11,7 @@
         <meta charset="UTF-8">
         <title>Home Page</title>
         <!-- Display Records -->
-    <h1>Employee Records</h1>
-
+    <h1>Employee Records</h1>    
     <style>
         body {
             background-color: #c1dbff;
@@ -64,7 +63,7 @@
             margin-bottom: 20px;
         }
 
-        .update-button {
+        .update {
             background-color: green;
             border: none;
             color: white;
@@ -112,6 +111,24 @@
             justify-content: space-between;
         }
 
+        .back {
+            background-color: orange;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .back:hover {
+            background-color: coral;
+        }
+
         .add-button:hover {
             background-color: darkblue;
         }
@@ -127,6 +144,7 @@
         tr:hover {
             background-color: azure;
         }
+
     </style>
 </head>
 <body>
@@ -137,10 +155,17 @@
             <input type="submit" value="Add" class="add-button">
         </form>
 
-        <!--Logout-->
-        <form action="logout" method="post">
-            <input type="submit" value="Logout" class="logout">
-        </form>
+        <div class="button-container">
+            <!--Back-->
+            <form action="welcome.jsp" method="post">
+                <input type="submit" value="Back" class="back">
+            </form>
+
+            <!--Logout-->
+            <form action="logout" method="post">
+                <input type="submit" value="Logout" class="logout">
+            </form>
+        </div>
     </div>
     <form>
         <table>
@@ -190,7 +215,7 @@
                     <td><%= rs.getString("City")%></td>
                     <td><%= rs.getString("State")%></td>
                     <td><%= rs.getString("Country")%></td>
-                    <td><a class="update-link update-button" href="update.jsp?empId=<%= rs.getString("EmpID")%>">Update</a></td>
+                    <td><a class="update" href="update.jsp?empId=<%= rs.getString("EmpID")%>">Update</a></td>
                     <td><button class="delete-button" data-empid="<%= rs.getString("EmpID")%>">Delete</button></td>
                 </tr>
                 <%
