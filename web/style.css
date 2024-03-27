@@ -1,13 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 15 Mar, 2024, 10:57:52 AM
-    Author     : Malav.Shah
-*/
-
 body {
     font-family: Arial, sans-serif;
     background-color: #c1dbff;
@@ -25,7 +15,7 @@ h1 {
     border: 2px solid blue;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     padding: 10px;
-    margin-left: 25%;
+    margin-left: 40%;
     font-family: Arial, sans-serif;
     background-color: greenyellow;
 }
@@ -37,24 +27,27 @@ h1 {
 }
 
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 50%;
     margin: auto;
-    height: 50%;
+/*    height: 50%;
     background-color: #fff;
-    border: 2px solid blue;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    border-spacing: 0; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
 }
 
 th, td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 10px;
+    border: none;
+    text-align: center;
+    /*padding: 12px;*/
+    /*background-color: aqua;*/
+    margin-top: 5px;
 }
 
 input[type="text"], input[type="date"], input[type="number"] {
-    width: 100%;
-    padding: 8px;
+    width: 96%;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -71,7 +64,7 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-    margin-left: 25%;
+    margin-left: 45%;
 }
 
 input[type="submit"]:hover {
@@ -96,7 +89,7 @@ input[type="Button"]:hover{
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-    margin-left: 37.5%;
+    /*margin-left: 37.5%;*/
 }
 
 input:focus, a:focus {

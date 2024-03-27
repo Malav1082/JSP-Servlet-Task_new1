@@ -16,7 +16,8 @@
             }
 
             .password-toggle .toggle-password {
-                position: absolute;
+                position: relative;
+                left: -30px;
                 top: 50%;
                 transform: translateY(-50%);
                 cursor: pointer;
