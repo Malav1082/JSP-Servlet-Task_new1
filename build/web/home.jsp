@@ -16,6 +16,7 @@
         body {
             background-color: #c1dbff;
         }
+        
         h1 {
             text-align: center;
             color: black; 
@@ -28,7 +29,9 @@
             padding: 10px;
             margin-left: 37%;
             font-family: Arial, sans-serif;
+            background-color: greenyellow;
         }
+        
         table {
             border-collapse: collapse;
             width: 100%;
@@ -49,7 +52,7 @@
         }
 
         .add-button {
-            background-color: blue;
+            background-color: #2196F3;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -130,9 +133,9 @@
         }
 
         .add-button:hover {
-            background-color: darkblue;
+            background-color: blue;
         }
-        .update-button:hover {
+        .update:hover {
             background-color: darkgreen;
         }
         .delete-button:hover {

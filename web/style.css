@@ -27,6 +27,7 @@ h1 {
     padding: 10px;
     margin-left: 25%;
     font-family: Arial, sans-serif;
+    background-color: greenyellow;
 }
 
 .table-container {
@@ -70,6 +71,7 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    margin-left: 25%;
 }
 
 input[type="submit"]:hover {
@@ -94,6 +96,7 @@ input[type="Button"]:hover{
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    margin-left: 37.5%;
 }
 
 input:focus, a:focus {

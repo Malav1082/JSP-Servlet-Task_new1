@@ -98,7 +98,8 @@ public class LoginServlet extends HttpServlet {
 
             HttpSession session = request.getSession(true);
             session.setAttribute("userID", userID.toString());
-
+            session.setAttribute("email",email);
+            
             response.sendRedirect("welcome.jsp");
         }
     }
