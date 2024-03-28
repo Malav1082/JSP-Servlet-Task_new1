@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     background-color: #c1dbff;
@@ -20,65 +21,28 @@ h1 {
     margin-right: 30%;
     font-family: Arial, sans-serif;
     background-color: greenyellow;
-    margin-bottom: 20px;
-}
-
-.table-container {
-    margin: auto;
-    overflow: auto;
-    height: 50%;
 }
 
 table {
-    border-collapse: separate;
-    /*width: 50%;*/
-    margin: auto;
-    /*height: 50%;*/
-    margin-bottom: 10px;
+    border-collapse: collapse;
+    width: 100%;
     background-color: #fff;
-    border-color: darkviolet;
-    border-spacing: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 }
-
 th, td {
-    border: none;
+    border: 2px solid black;
     text-align: center;
-    /*padding: 12px;*/
-    /*background-color: aqua;*/
-    margin-top: 5px;
+    padding: 5px;
+    word-wrap: break-word;
+    width: 100px;
+    border-color: black;
+}
+th {
+    background-color: gold;
+    height: 30px;
 }
 
-input[type="text"], input[type="date"], input[type="number"] {
-    width: 96%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    background-color: lightyellow;
-}
-
-input[type="text"]:hover, input[type="date"]:hover, input[type="number"]:hover {
-    background-color: lightyellow;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#submit {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    margin-left: 60%;
-    margin-bottom: 20px;
-}
-
-.home{
-    margin-right: 10%;
+.add-button {
     background-color: #2196F3;
     border: none;
     color: white;
@@ -90,15 +54,11 @@ input[type="text"]:hover, input[type="date"]:hover, input[type="number"]:hover {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-.home:hover {
-    background-color: blue;
-}
-
-.logout{
-    margin-right: 10%;
-    background-color: grey;
+.update {
+    background-color: green;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -111,38 +71,72 @@ input[type="text"]:hover, input[type="date"]:hover, input[type="number"]:hover {
     border-radius: 5px;
 }
 
-.logout:hover {
-    background-color: black;
+.delete-button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-#submit:hover {
-    background-color: green;
+.logout {
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-input[type="Button"]:hover{
-    background-color: coral;
-}
-
-.error-message {
-    color: red;
-    margin-top: 10px;
+.button-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .back {
     background-color: orange;
+    border: none;
     color: white;
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     font-size: 16px;
-    margin-top: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
     margin-bottom: 20px;
-    margin-left: 10%;
+}
+.back:hover {
+    background-color: coral;
 }
 
-input:focus, a:focus {
-    outline: 2px solid blueviolet;
+.add-button:hover {
+    background-color: blue;
+}
+.update:hover {
+    background-color: darkgreen;
+}
+.delete-button:hover {
+    background-color: firebrick;
+}
+.logout:hover {
+    background-color: black;
+}
+tr:hover {
+    background-color: azure;
 }
 
 .header-container {
@@ -215,8 +209,4 @@ footer {
     background-color: indigo;
     margin-bottom: 0;
     margin-top: 0;
-}
-
-.td-btn{
-    display: flex;
 }

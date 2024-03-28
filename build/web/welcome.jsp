@@ -12,7 +12,7 @@
     </head>
     <body>
         <%!
-            String[] val = new String[2];
+            String[] v = new String[2];
         %>
         <%
             String email = (String) session.getAttribute("email");
@@ -31,8 +31,8 @@
                 rs = stmt.executeQuery();
 
                 if (rs.next()) {
-                    val[0] = email;
-                    val[1] = rs.getString("MobileNumber");
+                    v[0] = email;
+                    v[1] = rs.getString("MobileNumber");
 
                 } else {
                     System.out.println("No records found for the provided email.");
@@ -56,22 +56,23 @@
                 }
             }
         %>
+        <script>
+            function showDropdown() {
+                document.getElementById("dropdownContent").style.display = "block";
+            }
+
+            function hideDropdown() {
+                document.getElementById("dropdownContent").style.display = "none";
+            }
+        </script>
         <header>
             <div class="header-container">
-                <img src="1.png" class="logo">
-                <div class="header">
-                    <form>
-                        <table>
-                            <tr>
-                                <td>Email:</td>
-                                <td><input type="text" name="email" value='<%=val[0]%>' readonly></td>
-                            </tr>
-                            <tr>
-                                <td>Mobile Number:</td>
-                                <td><input type="text" name="MobileNumber" value='<%=val[1]%>' readonly></td>
-                            </tr>
-                        </table>
-                    </form>
+                <div class="profile-container" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+                    <img src="1.png" class="logo">
+                    <div class="dropdown-content" id="dropdownContent">
+                        <p><%=v[0]%></p>
+                        <p><%=v[1]%></p>
+                    </div>
                 </div>
                 <div class="header1">
                     <form action="home.jsp" method="post">
@@ -90,7 +91,7 @@
                     <div class="welcome-text">
                         Welcome to Employee Records Management System.
                     </div>
-                        <img src="emp1.jpg" class="custom-img">
+                    <img src="emp1.jpg" class="custom-img">
                 </div>
             </div>
         </div>
