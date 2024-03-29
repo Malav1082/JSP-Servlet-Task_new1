@@ -12,6 +12,14 @@
         <title>Add Records</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script>
+//            // Function to display an alert box with a success message and redirect after 2 seconds
+//            function showSuccessAndRedirect(message, redirectUrl) {
+//                alert(message);
+//                setTimeout(function () {
+//                    window.location.href = redirectUrl;
+//                }, 2000); // Redirect after 2 seconds
+//            }
+
             // Function to extract URL parameters
             function getUrlParameter(name) {
                 name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -50,6 +58,14 @@
                 document.getElementsByName("city")[0].value = city;
                 document.getElementsByName("state")[0].value = state;
                 document.getElementsByName("country")[0].value = country;
+            }
+
+            function showDropdown() {
+                document.getElementById("dropdownContent").style.display = "block";
+            }
+
+            function hideDropdown() {
+                document.getElementById("dropdownContent").style.display = "none";
             }
         </script>
 
@@ -100,15 +116,7 @@
                 }
             }
         %>
-        <script>
-            function showDropdown() {
-                document.getElementById("dropdownContent").style.display = "block";
-            }
 
-            function hideDropdown() {
-                document.getElementById("dropdownContent").style.display = "none";
-            }
-        </script>
         <header>
             <div class="header-container">
                 <div class="profile-container" onmouseover="showDropdown()" onmouseout="hideDropdown()">
@@ -130,77 +138,78 @@
         </header>
         <h1>Add Records</h1>
 
-<!--        Display error message if present 
-    <c:if test="${not empty errorMessage}">
-        <p style="color: red;">${errorMessage}</p>
-    </c:if>-->
-    <form action="EmployeeServlet" method="post">
-        <input type="hidden" name="action" value="add">
-        <c:set var="empId" value="${param.empId}" />
-        <c:set var="empName" value="${param.empName}" />
-        <c:set var="designation" value="${param.designation}" />
-        <c:set var="department" value="${param.department}" />
-        <c:set var="joinedDate" value="${param.joinedDate}" />
-        <c:set var="salary" value="${param.salary}" />
-        <c:set var="addressLine1" value="${param.addressLine1}" />
-        <c:set var="addressLine2" value="${param.addressLine2}" />
-        <c:set var="city" value="${param.city}" />
-        <c:set var="state" value="${param.state}" />
-        <c:set var="country" value="${param.country}" />
-        <div class="table-container">
-            <table>
-                <tr>
-                    <td>EmpID</td>
-                    <td><input type="text" pattern="[a-zA-Z0-9]+" name="empId" placeholder="Enter EmpID" required></td>
-                </tr>
-                <tr>
-                    <td>EmpName</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="empName" placeholder="Enter EmpName" required></td>
-                </tr>
-                <tr>
-                    <td>Designation</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="designation" placeholder="Enter Designation" required></td>
-                </tr>
-                <tr>
-                    <td>Department</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="department" placeholder="Enter Department" required></td>
-                </tr>
-                <tr>
-                    <td>JoinedDate</td>
-                    <td><input type="date" name="joinedDate" placeholder="Enter JoinedDate" max="<%=java.time.LocalDate.now()%>" required></td>
-                </tr>
-                <tr>
-                    <td>Salary</td>
-                    <td><input type="number" pattern="\d+" name="salary" placeholder="Enter Salary" required></td>
-                </tr>
-                <tr>
-                    <td>AddressLine1</td>
-                    <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine1" placeholder="Enter AddressLine1" required></td>
-                </tr>
-                <tr>
-                    <td>AddressLine2</td>
-                    <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine2" placeholder="Enter AddressLine2" required></td>
-                </tr>
-                <tr>
-                    <td>City</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="city" placeholder="Enter City" required></td>
-                </tr>
-                <tr>
-                    <td>State</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="state" placeholder="Enter State" required></td>
-                </tr>
-                <tr>
-                    <td>Country</td>
-                    <td><input type="text" pattern="[a-zA-Z\s]+" name="country" placeholder="Enter Country" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td-btn">
-                        <input type="submit" id="submit" name="Submit" value="Submit">
-                        <input type="Button" value="Back" onclick="location.href = 'home.jsp';" class="back">
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <!--        Display error message if present 
+            <c:if test="${not empty errorMessage}">
+                <p style="color: red;">${errorMessage}</p>
+            </c:if>-->
+        <form action="EmployeeServlet" method="post">
+            <input type="hidden" name="action" value="add">
+            <c:set var="empId" value="${param.empId}" />
+            <c:set var="empName" value="${param.empName}" />
+            <c:set var="designation" value="${param.designation}" />
+            <c:set var="department" value="${param.department}" />
+            <c:set var="joinedDate" value="${param.joinedDate}" />
+            <c:set var="salary" value="${param.salary}" />
+            <c:set var="addressLine1" value="${param.addressLine1}" />
+            <c:set var="addressLine2" value="${param.addressLine2}" />
+            <c:set var="city" value="${param.city}" />
+            <c:set var="state" value="${param.state}" />
+            <c:set var="country" value="${param.country}" />
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <td>EmpID</td>
+                        <td><input type="text" pattern="[a-zA-Z0-9]+" name="empId" placeholder="Enter EmpID" required></td>
+                    </tr>
+                    <tr>
+                        <td>EmpName</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="empName" placeholder="Enter EmpName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Designation</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="designation" placeholder="Enter Designation" required></td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="department" placeholder="Enter Department" required></td>
+                    </tr>
+                    <tr>
+                        <td>JoinedDate</td>
+                        <td><input type="date" name="joinedDate" placeholder="Enter JoinedDate" max="<%=java.time.LocalDate.now()%>" required></td>
+                    </tr>
+                    <tr>
+                        <td>Salary</td>
+                        <td><input type="number" pattern="\d+" name="salary" placeholder="Enter Salary" required></td>
+                    </tr>
+                    <tr>
+                        <td>AddressLine1</td>
+                        <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine1" placeholder="Enter AddressLine1" required></td>
+                    </tr>
+                    <tr>
+                        <td>AddressLine2</td>
+                        <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine2" placeholder="Enter AddressLine2" required></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="city" placeholder="Enter City" required></td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="state" placeholder="Enter State" required></td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td><input type="text" pattern="[a-zA-Z\s]+" name="country" placeholder="Enter Country" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="td-btn">
+                            <input type="submit" id="submit" name="Submit" value="Submit">
+                            <input type="Button" value="Back" onclick="location.href = 'home.jsp';" class="back">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </body>
     <footer>
         <p class="footer-text">

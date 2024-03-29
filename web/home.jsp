@@ -6,7 +6,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@ page import="java.util.Enumeration" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%        
+<%
     System.out.println(request.getSession(false) + "home.jsp");
 
     // Initialize email and mobile number variables
@@ -95,12 +95,28 @@
             </div>
         </header>
         <h1>Employee Records</h1>    
+        <%
+            String successMessage = (String) session.getAttribute("successMessage");
+            if (successMessage != null) {
+        %>
+        <!--<div id="message-container"></div>-->
+        <div class="success-message-container">
+            <div class="success-message">
+                <%= successMessage%>
+            </div>
+        </div>
+        <%
+                // Clear the success message from session
+                session.removeAttribute("successMessage");
+            }
+        %>
         <div class="button-container">
             <!-- Add Record -->
             <form action="add.jsp" method="post">
                 <input type="submit" value="Add" class="add-button">
             </form>
         </div>
+
         <form>
             <table>
                 <thead>
@@ -195,8 +211,16 @@
                                 method: 'POST'
                             }).then(response => {
                                 if (response.ok) {
-                                    // Reload page after successful deletion
-                                    window.location.reload();
+                                    // Display delete success message in the existing container
+                                    const successMessage = document.createElement('div');
+                                    successMessage.classList.add('success-message');
+                                    successMessage.innerText = 'Record deleted successfully.';
+                                    document.querySelector('.success-message').appendChild(successMessage);
+
+                                    // Delay redirection to home.jsp after 2 seconds
+                                    setTimeout(() => {
+                                        window.location.href = 'home.jsp';
+                                    }, 2000);
                                 } else {
                                     console.error('Error deleting record');
                                 }
@@ -214,12 +238,11 @@
                     });
                 });
             </script>
-        </tbody>
-    </form>
-</body>
-<footer>
-    <p class="footer-text">
-        Copyrights &copy; reserved for Employee Records. All Rights Reserved.
-    </p>
-</footer>
+        </form>
+    </body>
+    <footer>
+        <p class="footer-text">
+            Copyrights &copy; reserved for Employee Records. All Rights Reserved.
+        </p>
+    </footer>
 </html>

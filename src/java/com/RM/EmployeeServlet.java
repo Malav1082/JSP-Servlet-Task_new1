@@ -77,7 +77,6 @@ public class EmployeeServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
 //    private static final String JDBC_URL = "jdbc:sqlite:D:\\Java Training\\Task 4\\RM//Records.db";
-
     @Override
     public void init() throws ServletException {
         super.init();
@@ -129,9 +128,9 @@ public class EmployeeServlet extends HttpServlet {
 
         try {
             ServletContext con = getServletContext();
-        String realPath = con.getRealPath("Records.db");
-        System.out.println("Database path: " + realPath);
-        String JDBC_URL = "jdbc:sqlite:" + realPath;
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
             String sql = "SELECT COUNT(*) FROM TblEmployeeMaster WHERE EmpID = ?";
             ps = conn.prepareStatement(sql);
@@ -175,7 +174,7 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         String userID = (String) request.getSession().getAttribute("userID");
 
-        System.out.println("a b" +request.getSession(false));
+        System.out.println("a b" + request.getSession(false));
 
         String empId = request.getParameter("empId");
         String empName = request.getParameter("empName");
@@ -201,9 +200,9 @@ public class EmployeeServlet extends HttpServlet {
         Connection conn = null;
         try {
             ServletContext con = getServletContext();
-        String realPath = con.getRealPath("Records.db");
-        System.out.println("Database path: " + realPath);
-        String JDBC_URL = "jdbc:sqlite:" + realPath;
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
             // Begin transaction
             conn.setAutoCommit(false);
@@ -241,9 +240,16 @@ public class EmployeeServlet extends HttpServlet {
             }
             // Commit transaction
             conn.commit();
-            // Redirect back to home.jsp after adding record
-            response.sendRedirect("home.jsp");
-            System.out.println("a a" +request.getSession(false));
+            // Redirect back to home.jsp after updating record
+            String successMessage = "Record added successfully.";
+
+            // Display success message on the page
+            HttpSession session = request.getSession();
+            session.setAttribute("successMessage", successMessage);
+            response.setHeader("Refresh", "2; URL=home.jsp");
+            // response.sendRedirect("home.jsp");
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+            System.out.println("a a" + request.getSession(false));
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -281,9 +287,9 @@ public class EmployeeServlet extends HttpServlet {
         Connection conn = null;
         try {
             ServletContext con = getServletContext();
-        String realPath = con.getRealPath("Records.db");
-        System.out.println("Database path: " + realPath);
-        String JDBC_URL = "jdbc:sqlite:" + realPath;
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
 
             // Update data in TblEmployeeMaster table
@@ -311,8 +317,17 @@ public class EmployeeServlet extends HttpServlet {
             }
 
             // Redirect back to home.jsp after updating record
-            response.sendRedirect("home.jsp");
+            String successMessage = "Record updated successfully.";
+
+            // Display success message on the page
+            HttpSession session = request.getSession();
+            // Set action attribute to indicate that the action was a update operation
+            session.setAttribute("successMessage", successMessage);
+            response.setHeader("Refresh", "2; URL=home.jsp");
+            // response.sendRedirect("home.jsp");
+            request.getRequestDispatcher("home.jsp").forward(request, response);
             System.out.println("u a" + request.getSession(false));
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error: " + ex.getMessage());
@@ -341,9 +356,9 @@ public class EmployeeServlet extends HttpServlet {
         Connection conn = null;
         try {
             ServletContext con = getServletContext();
-        String realPath = con.getRealPath("Records.db");
-        System.out.println("Database path: " + realPath);
-        String JDBC_URL = "jdbc:sqlite:" + realPath;
+            String realPath = con.getRealPath("Records.db");
+            System.out.println("Database path: " + realPath);
+            String JDBC_URL = "jdbc:sqlite:" + realPath;
             conn = DriverManager.getConnection(JDBC_URL);
 
             // Delete record from TblEmployeeDetail table using subquery
@@ -365,7 +380,11 @@ public class EmployeeServlet extends HttpServlet {
                 // Log the number of rows affected for debugging
                 System.out.println("Rows affected in TblEmployeeMaster: " + rowsAffectedMaster);
             }
-            // Redirect back to home.jsp after deleting record
+
+            // Set success message attribute in session
+            HttpSession session = request.getSession();
+            session.setAttribute("successMessage", "Record deleted successfully.");
+
             response.sendRedirect("home.jsp");
             System.out.println("d a" + request.getSession(false));
         } catch (SQLException ex) {
