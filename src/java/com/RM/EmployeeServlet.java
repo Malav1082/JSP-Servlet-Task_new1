@@ -381,11 +381,17 @@ public class EmployeeServlet extends HttpServlet {
                 System.out.println("Rows affected in TblEmployeeMaster: " + rowsAffectedMaster);
             }
 
-            // Set success message attribute in session
-            HttpSession session = request.getSession();
-            session.setAttribute("successMessage", "Record deleted successfully.");
+             // Redirect back to home.jsp after updating record
+            String successMessage = "Record deleted successfully.";
 
-            response.sendRedirect("home.jsp");
+            // Display success message on the page
+            HttpSession session = request.getSession();
+            // Set action attribute to indicate that the action was a update operation
+            session.setAttribute("successMessage", successMessage);
+            response.setHeader("Refresh", "2; URL=home.jsp");
+            // response.sendRedirect("home.jsp");
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+            
             System.out.println("d a" + request.getSession(false));
         } catch (SQLException ex) {
             ex.printStackTrace();

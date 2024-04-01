@@ -55,7 +55,6 @@
                 var password = document.forms["loginForm"]["password"].value;
                 var errorMessageContainer = document.getElementById("errorMessage");
 
-
                 if (email === "") {
                     errorMessageContainer.innerText = "Email cannot be empty.";
                     document.getElementById("email").focus();

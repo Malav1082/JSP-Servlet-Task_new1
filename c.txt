@@ -60,7 +60,19 @@
             function hideDropdown() {
                 document.getElementById("dropdownContent").style.display = "none";
             }
-            
+
+//            function focusOnField() {
+//                var errorFields = document.querySelectorAll('.error'); // Assuming you have a CSS class 'error' for error fields
+//                if (errorFields.length > 0) {
+//                    errorFields[0].focus(); // Set focus on the first error field
+//                } else {
+//                    // If no fields with error class found, focus on the first input field
+//                    var inputFields = document.querySelectorAll('input[type=text], input[type=date], input[type=number]');
+//                    if (inputFields.length > 0) {
+//                        inputFields[0].focus();
+//                    }
+//                }
+//            }
             function validateForm() {
                 var empId = document.forms["addRecordsForm"]["empId"].value;
                 var empName = document.forms["addRecordsForm"]["empName"].value;
@@ -79,148 +91,129 @@
                 if (empId === "") {
                     errorMessageContainer.innerText = "Please fill in EmpID";
                     document.getElementsByName("empId")[0].focus();
-                    return false;
+                    isValid = false;
                 }
 
                 var empIdPattern = /^[a-zA-Z0-9]+$/;
                 if (!empIdPattern.test(empId)) {
                     errorMessageContainer.innerText = "EmpID should contain only alphanumeric characters.";
                     document.getElementsByName("empId")[0].focus();
-                    return false;
+                    isValid = false;
                 }
 
                 if (empName === "") {
                     errorMessageContainer.innerText = "Please fill in EmpName";
-                    document.getElementsByName("empName")[0].focus();
                     return false;
                 }
 
                 var empNamePattern = /^[a-zA-Z\s]+$/;
                 if (!empNamePattern.test(empName)) {
-                    errorMessageContainer.innerText = "Employee Name should contain only alphabets and spaces.";
-                    document.getElementsByName("empName")[0].focus();
+                    errorMessageContainer.innerText = "EmpName should contain only alphabets and spaces.";
                     return false;
                 }
 
                 if (designation === "") {
                     errorMessageContainer.innerText = "Please fill in Designation";
-                    document.getElementsByName("designation")[0].focus();
                     return false;
                 }
 
                 var designationPattern = /^[a-zA-Z\s]+$/;
                 if (!designationPattern.test(designation)) {
                     errorMessageContainer.innerText = "Designation should contain only alphabets and spaces.";
-                    document.getElementsByName("designation")[0].focus();
                     return false;
                 }
 
                 if (department === "") {
                     errorMessageContainer.innerText = "Please fill in Designation";
-                    document.getElementsByName("department")[0].focus();
                     return false;
                 }
 
                 var departmentPattern = /^[a-zA-Z\s+#.]+$/;
                 if (!departmentPattern.test(department)) {
                     errorMessageContainer.innerText = "Department should contain only alphabets and spaces.";
-                    document.getElementsByName("department")[0].focus();
                     return false;
                 }
 
                 if (joinedDate === "") {
                     errorMessageContainer.innerText = "Please fill in JoinedDate";
-                    document.getElementsByName("joinedDate")[0].focus();
                     return false;
                 }
 
                 var joinedDatePattern = /^\d{4}-\d{2}-\d{2}$/;
                 if (!joinedDatePattern.test(joinedDate)) {
                     errorMessageContainer.innerText = "joinedDate should contain only alphabets and spaces.";
-                    document.getElementsByName("joinedDate")[0].focus();
                     return false;
                 }
 
                 if (salary === "") {
                     errorMessageContainer.innerText = "Please fill in Salary";
-                    document.getElementsByName("salary")[0].focus();
                     return false;
                 }
 
                 if (addressLine1 === "") {
                     errorMessageContainer.innerText = "Please fill in AddressLine1";
-                    document.getElementsByName("addressLine1")[0].focus();
                     return false;
                 }
 
                 var addressLine1Pattern = /^[a-zA-Z0-9]+$/;
                 if (!addressLine1Pattern.test(addressLine1)) {
                     errorMessageContainer.innerText = "AddressLine1 should contain only alphanumeric characters.";
-                    document.getElementsByName("addressLine1")[0].focus();
                     return false;
                 }
 
                 if (addressLine2 === "") {
                     errorMessageContainer.innerText = "Please fill in AddressLine1";
-                    document.getElementsByName("addressLine2")[0].focus();
                     return false;
                 }
 
                 var addressLine2Pattern = /^[a-zA-Z0-9]+$/;
                 if (!addressLine2Pattern.test(addressLine2)) {
                     errorMessageContainer.innerText = "AddressLine2 should contain only alphanumeric characters.";
-                    document.getElementsByName("addressLine2")[0].focus();
                     return false;
                 }
 
                 if (city === "") {
                     errorMessageContainer.innerText = "Please fill in City";
-                    document.getElementsByName("city")[0].focus();
                     return false;
                 }
 
                 var cityPattern = /^[a-zA-Z\s]+$/;
                 if (!cityPattern.test(city)) {
                     errorMessageContainer.innerText = "City should contain only alphabets and spaces.";
-                    document.getElementsByName("city")[0].focus();
                     return false;
                 }
 
                 if (state === "") {
                     errorMessageContainer.innerText = "Please fill in State";
-                    document.getElementsByName("state")[0].focus();
                     return false;
                 }
 
                 var statePattern = /^[a-zA-Z\s]+$/;
                 if (!statePattern.test(state)) {
                     errorMessageContainer.innerText = "State should contain only alphabets and spaces.";
-                    document.getElementsByName("state")[0].focus();
                     return false;
                 }
 
-                if (country === "") {
+                if (Country === "") {
                     errorMessageContainer.innerText = "Please fill in Country";
-                    document.getElementsByName("country")[0].focus();
                     return false;
                 }
 
                 var countryPattern = /^[a-zA-Z\s]+$/;
                 if (!countryPattern.test(country)) {
                     errorMessageContainer.innerText = "Country should contain only alphabets and spaces.";
-                    document.getElementsByName("country")[0].focus();
                     return false;
                 }
+//                if (errorMessageContainer.innerText !== "") {
+//                    focusOnField();
+//                    isValid = false;
+//                }
 
-                if (errorMessageContainer.innerText !== "") {
-                    focusOnField();
-                    isValid = false;
-                }
-
-                // Reset error message container
-                errorMessageContainer.innerText = "";
                 return isValid;
+                errorMessageContainer.innerText = "";
+                return true;
             }
+
 
         </script>
 
@@ -298,7 +291,7 @@
                 <p style="color: red;">${errorMessage}</p>
             </c:if>-->
         <div class="table-container">
-            <form name="addRecordsForm" action="EmployeeServlet" method="post" onsubmit="return validateForm();">
+            <form name="addRecordsForm" action="EmployeeServlet" method="post" onsubmit="return validateForm();" onload="focusOnField()">
                 <input type="hidden" name="action" value="add">
                 <c:set var="empId" value="${param.empId}" />
                 <c:set var="empName" value="${param.empName}" />
@@ -316,7 +309,7 @@
                         String errorMessage = (String) request.getAttribute("errorMessage");
                         if (errorMessage != null && !errorMessage.isEmpty()) {
                     %>
-                    <p class="error-message">
+                    <p id="errorMessage" class="error-message">
                         <%= errorMessage%>
                     </p>
                     <% }%>
@@ -330,7 +323,7 @@
 
                     <tr>
                         <td>EmpID</td>
-                        <td><input type="text" name="empId" placeholder="Enter EmpID"></td>
+                        <td><input type="text" name="empId" placeholder="Enter EmpID" <% if (request.getAttribute("empId") != null) {%>value="<%= request.getAttribute("empId")%>"<% }%>></td>
                     </tr>
                     <tr>
                         <td>EmpName</td>

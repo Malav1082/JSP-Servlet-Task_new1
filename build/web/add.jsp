@@ -12,13 +12,6 @@
         <title>Add Records</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script>
-//            // Function to display an alert box with a success message and redirect after 2 seconds
-//            function showSuccessAndRedirect(message, redirectUrl) {
-//                alert(message);
-//                setTimeout(function () {
-//                    window.location.href = redirectUrl;
-//                }, 2000); // Redirect after 2 seconds
-//            }
 
             // Function to extract URL parameters
             function getUrlParameter(name) {
@@ -67,6 +60,168 @@
             function hideDropdown() {
                 document.getElementById("dropdownContent").style.display = "none";
             }
+            
+            function validateForm() {
+                var empId = document.forms["addRecordsForm"]["empId"].value;
+                var empName = document.forms["addRecordsForm"]["empName"].value;
+                var designation = document.forms["addRecordsForm"]["designation"].value;
+                var department = document.forms["addRecordsForm"]["department"].value;
+                var joinedDate = document.forms["addRecordsForm"]["joinedDate"].value;
+                var salary = document.forms["addRecordsForm"]["salary"].value;
+                var addressLine1 = document.forms["addRecordsForm"]["addressLine1"].value;
+                var addressLine2 = document.forms["addRecordsForm"]["addressLine2"].value;
+                var city = document.forms["addRecordsForm"]["city"].value;
+                var state = document.forms["addRecordsForm"]["state"].value;
+                var country = document.forms["addRecordsForm"]["country"].value;
+                var errorMessageContainer = document.getElementById("errorMessage");
+                var isValid = true;
+
+                if (empId === "") {
+                    errorMessageContainer.innerText = "Please fill in EmpID";
+                    document.getElementsByName("empId")[0].focus();
+                    return false;
+                }
+
+                var empIdPattern = /^[a-zA-Z0-9]+$/;
+                if (!empIdPattern.test(empId)) {
+                    errorMessageContainer.innerText = "EmpID should contain only alphanumeric characters.";
+                    document.getElementsByName("empId")[0].focus();
+                    return false;
+                }
+
+                if (empName === "") {
+                    errorMessageContainer.innerText = "Please fill in EmpName";
+                    document.getElementsByName("empName")[0].focus();
+                    return false;
+                }
+
+                var empNamePattern = /^[a-zA-Z\s]+$/;
+                if (!empNamePattern.test(empName)) {
+                    errorMessageContainer.innerText = "Employee Name should contain only alphabets and spaces.";
+                    document.getElementsByName("empName")[0].focus();
+                    return false;
+                }
+
+                if (designation === "") {
+                    errorMessageContainer.innerText = "Please fill in Designation";
+                    document.getElementsByName("designation")[0].focus();
+                    return false;
+                }
+
+                var designationPattern = /^[a-zA-Z\s]+$/;
+                if (!designationPattern.test(designation)) {
+                    errorMessageContainer.innerText = "Designation should contain only alphabets and spaces.";
+                    document.getElementsByName("designation")[0].focus();
+                    return false;
+                }
+
+                if (department === "") {
+                    errorMessageContainer.innerText = "Please fill in Designation";
+                    document.getElementsByName("department")[0].focus();
+                    return false;
+                }
+
+                var departmentPattern = /^[a-zA-Z\s+#.]+$/;
+                if (!departmentPattern.test(department)) {
+                    errorMessageContainer.innerText = "Department should contain only alphabets and spaces.";
+                    document.getElementsByName("department")[0].focus();
+                    return false;
+                }
+
+                if (joinedDate === "") {
+                    errorMessageContainer.innerText = "Please fill in JoinedDate";
+                    document.getElementsByName("joinedDate")[0].focus();
+                    return false;
+                }
+
+                var joinedDatePattern = /^\d{4}-\d{2}-\d{2}$/;
+                if (!joinedDatePattern.test(joinedDate)) {
+                    errorMessageContainer.innerText = "joinedDate should contain only alphabets and spaces.";
+                    document.getElementsByName("joinedDate")[0].focus();
+                    return false;
+                }
+
+                if (salary === "") {
+                    errorMessageContainer.innerText = "Please fill in Salary";
+                    document.getElementsByName("salary")[0].focus();
+                    return false;
+                }
+
+                if (addressLine1 === "") {
+                    errorMessageContainer.innerText = "Please fill in AddressLine1";
+                    document.getElementsByName("addressLine1")[0].focus();
+                    return false;
+                }
+
+                var addressLine1Pattern = /^[a-zA-Z0-9]+$/;
+                if (!addressLine1Pattern.test(addressLine1)) {
+                    errorMessageContainer.innerText = "AddressLine1 should contain only alphanumeric characters.";
+                    document.getElementsByName("addressLine1")[0].focus();
+                    return false;
+                }
+
+                if (addressLine2 === "") {
+                    errorMessageContainer.innerText = "Please fill in AddressLine1";
+                    document.getElementsByName("addressLine2")[0].focus();
+                    return false;
+                }
+
+                var addressLine2Pattern = /^[a-zA-Z0-9]+$/;
+                if (!addressLine2Pattern.test(addressLine2)) {
+                    errorMessageContainer.innerText = "AddressLine2 should contain only alphanumeric characters.";
+                    document.getElementsByName("addressLine2")[0].focus();
+                    return false;
+                }
+
+                if (city === "") {
+                    errorMessageContainer.innerText = "Please fill in City";
+                    document.getElementsByName("city")[0].focus();
+                    return false;
+                }
+
+                var cityPattern = /^[a-zA-Z\s]+$/;
+                if (!cityPattern.test(city)) {
+                    errorMessageContainer.innerText = "City should contain only alphabets and spaces.";
+                    document.getElementsByName("city")[0].focus();
+                    return false;
+                }
+
+                if (state === "") {
+                    errorMessageContainer.innerText = "Please fill in State";
+                    document.getElementsByName("state")[0].focus();
+                    return false;
+                }
+
+                var statePattern = /^[a-zA-Z\s]+$/;
+                if (!statePattern.test(state)) {
+                    errorMessageContainer.innerText = "State should contain only alphabets and spaces.";
+                    document.getElementsByName("state")[0].focus();
+                    return false;
+                }
+
+                if (country === "") {
+                    errorMessageContainer.innerText = "Please fill in Country";
+                    document.getElementsByName("country")[0].focus();
+                    return false;
+                }
+
+                var countryPattern = /^[a-zA-Z\s]+$/;
+                if (!countryPattern.test(country)) {
+                    errorMessageContainer.innerText = "Country should contain only alphabets and spaces.";
+                    document.getElementsByName("country")[0].focus();
+                    return false;
+                }
+
+                if (errorMessageContainer.innerText !== "") {
+                    focusOnField();
+                    isValid = false;
+                }
+
+                // Reset error message container
+                errorMessageContainer.innerText = "";
+                return isValid;
+            }
+
         </script>
 
     </head>
@@ -142,74 +297,90 @@
             <c:if test="${not empty errorMessage}">
                 <p style="color: red;">${errorMessage}</p>
             </c:if>-->
-        <form action="EmployeeServlet" method="post">
-            <input type="hidden" name="action" value="add">
-            <c:set var="empId" value="${param.empId}" />
-            <c:set var="empName" value="${param.empName}" />
-            <c:set var="designation" value="${param.designation}" />
-            <c:set var="department" value="${param.department}" />
-            <c:set var="joinedDate" value="${param.joinedDate}" />
-            <c:set var="salary" value="${param.salary}" />
-            <c:set var="addressLine1" value="${param.addressLine1}" />
-            <c:set var="addressLine2" value="${param.addressLine2}" />
-            <c:set var="city" value="${param.city}" />
-            <c:set var="state" value="${param.state}" />
-            <c:set var="country" value="${param.country}" />
-            <div class="table-container">
+        <div class="table-container">
+            <form name="addRecordsForm" action="EmployeeServlet" method="post" onsubmit="return validateForm();">
+                <input type="hidden" name="action" value="add">
+                <c:set var="empId" value="${param.empId}" />
+                <c:set var="empName" value="${param.empName}" />
+                <c:set var="designation" value="${param.designation}" />
+                <c:set var="department" value="${param.department}" />
+                <c:set var="joinedDate" value="${param.joinedDate}" />
+                <c:set var="salary" value="${param.salary}" />
+                <c:set var="addressLine1" value="${param.addressLine1}" />
+                <c:set var="addressLine2" value="${param.addressLine2}" />
+                <c:set var="city" value="${param.city}" />
+                <c:set var="state" value="${param.state}" />
+                <c:set var="country" value="${param.country}" />
                 <table>
+                    <%
+                        String errorMessage = (String) request.getAttribute("errorMessage");
+                        if (errorMessage != null && !errorMessage.isEmpty()) {
+                    %>
+                    <p class="error-message">
+                        <%= errorMessage%>
+                    </p>
+                    <% }%>
+
+                    <tr>
+                        <td colspan="2">
+                            <!-- Error message will be displayed here -->
+                            <p id="errorMessage" class="error-message"></p>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>EmpID</td>
-                        <td><input type="text" pattern="[a-zA-Z0-9]+" name="empId" placeholder="Enter EmpID" required></td>
+                        <td><input type="text" name="empId" placeholder="Enter EmpID"></td>
                     </tr>
                     <tr>
                         <td>EmpName</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="empName" placeholder="Enter EmpName" required></td>
+                        <td><input type="text" name="empName" placeholder="Enter EmpName"></td>
                     </tr>
                     <tr>
                         <td>Designation</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="designation" placeholder="Enter Designation" required></td>
+                        <td><input type="text" name="designation" placeholder="Enter Designation"></td>
                     </tr>
                     <tr>
                         <td>Department</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="department" placeholder="Enter Department" required></td>
+                        <td><input type="text" name="department" placeholder="Enter Department"></td>
                     </tr>
                     <tr>
                         <td>JoinedDate</td>
-                        <td><input type="date" name="joinedDate" placeholder="Enter JoinedDate" max="<%=java.time.LocalDate.now()%>" required></td>
+                        <td><input type="date" name="joinedDate" placeholder="Enter JoinedDate" max="<%=java.time.LocalDate.now()%>" ></td>
                     </tr>
                     <tr>
                         <td>Salary</td>
-                        <td><input type="number" pattern="\d+" name="salary" placeholder="Enter Salary" required></td>
+                        <td><input type="number" name="salary" placeholder="Enter Salary"></td>
                     </tr>
                     <tr>
                         <td>AddressLine1</td>
-                        <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine1" placeholder="Enter AddressLine1" required></td>
+                        <td><input type="text" name="addressLine1" placeholder="Enter AddressLine1"></td>
                     </tr>
                     <tr>
                         <td>AddressLine2</td>
-                        <td><input type="text" pattern="[a-zA-Z0-9\s]+" name="addressLine2" placeholder="Enter AddressLine2" required></td>
+                        <td><input type="text" name="addressLine2" placeholder="Enter AddressLine2"></td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="city" placeholder="Enter City" required></td>
+                        <td><input type="text" name="city" placeholder="Enter City"></td>
                     </tr>
                     <tr>
                         <td>State</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="state" placeholder="Enter State" required></td>
+                        <td><input type="text" name="state" placeholder="Enter State"></td>
                     </tr>
                     <tr>
                         <td>Country</td>
-                        <td><input type="text" pattern="[a-zA-Z\s]+" name="country" placeholder="Enter Country" required></td>
+                        <td><input type="text" name="country" placeholder="Enter Country"></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="td-btn">
-                            <input type="submit" id="submit" name="Submit" value="Submit">
+                            <input type="submit" id="submit" value="Submit">
                             <input type="Button" value="Back" onclick="location.href = 'home.jsp';" class="back">
                         </td>
                     </tr>
                 </table>
-            </div>
-        </form>
+            </form>
+        </div>
     </body>
     <footer>
         <p class="footer-text">

@@ -211,16 +211,8 @@
                                 method: 'POST'
                             }).then(response => {
                                 if (response.ok) {
-                                    // Display delete success message in the existing container
-                                    const successMessage = document.createElement('div');
-                                    successMessage.classList.add('success-message');
-                                    successMessage.innerText = 'Record deleted successfully.';
-                                    document.querySelector('.success-message').appendChild(successMessage);
-
-                                    // Delay redirection to home.jsp after 2 seconds
-                                    setTimeout(() => {
-                                        window.location.href = 'home.jsp';
-                                    }, 2000);
+                                    // Reload page after successful deletion
+                                    window.location.reload();
                                 } else {
                                     console.error('Error deleting record');
                                 }
