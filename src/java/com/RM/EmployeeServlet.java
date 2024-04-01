@@ -328,9 +328,13 @@ public class EmployeeServlet extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
             System.out.println("u a" + request.getSession(false));
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error: " + ex.getMessage());
+         } catch (SQLException ex) {
+    ex.printStackTrace();
+    // Set the error message in the session
+    HttpSession session = request.getSession();
+    session.setAttribute("errorMessage", "Error deleting record: " + ex.getMessage());
+    // Redirect back to home.jsp
+    response.sendRedirect("home.jsp");
         } finally {
             // Close the connection
             if (conn != null) {
@@ -388,9 +392,9 @@ public class EmployeeServlet extends HttpServlet {
             HttpSession session = request.getSession();
             // Set action attribute to indicate that the action was a update operation
             session.setAttribute("successMessage", successMessage);
-            response.setHeader("Refresh", "2; URL=home.jsp");
-            // response.sendRedirect("home.jsp");
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+//            response.setHeader("Refresh", "2; URL=home.jsp");
+            response.sendRedirect("home.jsp");
+//            request.getRequestDispatcher("home.jsp").forward(request, response);
             
             System.out.println("d a" + request.getSession(false));
         } catch (SQLException ex) {

@@ -74,6 +74,11 @@
             function hideDropdown() {
                 document.getElementById("dropdownContent").style.display = "none";
             }
+            // Automatically hide the success message after 2 seconds
+            setTimeout(function () {
+                var successMessageContainer = document.getElementById('success-message-container');
+                successMessageContainer.style.display = 'none';
+            }, 2000);
         </script>
         <header>
             <div class="header-container">
