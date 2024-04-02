@@ -328,13 +328,13 @@ public class EmployeeServlet extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
             System.out.println("u a" + request.getSession(false));
 
-         } catch (SQLException ex) {
-    ex.printStackTrace();
-    // Set the error message in the session
-    HttpSession session = request.getSession();
-    session.setAttribute("errorMessage", "Error deleting record: " + ex.getMessage());
-    // Redirect back to home.jsp
-    response.sendRedirect("home.jsp");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Set the error message in the session
+            HttpSession session = request.getSession();
+            session.setAttribute("errorMessage", "Error deleting record: " + ex.getMessage());
+            // Redirect back to home.jsp
+            response.sendRedirect("home.jsp");
         } finally {
             // Close the connection
             if (conn != null) {
@@ -351,8 +351,6 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         // Retrieve the ID of the employee to be deleted from request parameters
         String empId = request.getParameter("empId");
-
-        System.out.println("d b" + request.getSession(false));
 
         // Log the received empId for debugging
         System.out.println("Received empId for deletion: " + empId);
@@ -385,18 +383,13 @@ public class EmployeeServlet extends HttpServlet {
                 System.out.println("Rows affected in TblEmployeeMaster: " + rowsAffectedMaster);
             }
 
-             // Redirect back to home.jsp after updating record
+            // Set success message in session
             String successMessage = "Record deleted successfully.";
-
-            // Display success message on the page
             HttpSession session = request.getSession();
-            // Set action attribute to indicate that the action was a update operation
             session.setAttribute("successMessage", successMessage);
-//            response.setHeader("Refresh", "2; URL=home.jsp");
-            response.sendRedirect("home.jsp");
-//            request.getRequestDispatcher("home.jsp").forward(request, response);
-            
-            System.out.println("d a" + request.getSession(false));
+
+            // Redirect back to home.jsp after updating record
+            response.sendRedirect("home.jsp?");
         } catch (SQLException ex) {
             ex.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error: " + ex.getMessage());

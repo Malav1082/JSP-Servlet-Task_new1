@@ -105,7 +105,7 @@
             if (successMessage != null) {
         %>
         <!--<div id="message-container"></div>-->
-        <div class="success-message-container">
+        <div class="success-message-container" id="success-message-container">
             <div class="success-message">
                 <%= successMessage%>
             </div>
@@ -216,8 +216,19 @@
                                 method: 'POST'
                             }).then(response => {
                                 if (response.ok) {
-                                    // Reload page after successful deletion
-                                    window.location.reload();
+                                    // Update success message container with delete message
+                                    const successMessageContainer = document.getElementById('success-message-container');
+                                    successMessageContainer.style.display = 'block'; // Make sure the container is visible
+                                    successMessageContainer.querySelector('.success-message').innerText = 'Record deleted successfully.';
+
+                                    // Hide success message after 2 seconds
+                                    setTimeout(function () {
+                                        successMessageContainer.style.display = 'none';
+                                    }, 2000);
+
+                                    // Remove the deleted row from the table
+                                    const deletedRow = button.closest('tr');
+                                    deletedRow.parentNode.removeChild(deletedRow);
                                 } else {
                                     console.error('Error deleting record');
                                 }
